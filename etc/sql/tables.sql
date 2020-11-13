@@ -24,8 +24,10 @@ CREATE TABLE transmissions (
 CREATE TABLE engines (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	description character varying(250),
-	price NUMERIC(9, 2) NOT NULL
+	price NUMERIC(9, 2) NOT NULL,
+	power INTEGER NOT NULL
 );
+
 
 CREATE TABLE wheels (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
