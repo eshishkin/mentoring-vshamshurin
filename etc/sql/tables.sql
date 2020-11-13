@@ -9,9 +9,10 @@ CREATE TABLE users (
 CREATE TABLE cars (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	brand character varying(50) NOT NULL,
-	wheels_id BIGINT REFERENCES wheels(id),
-	transmission_id BIGINT REFERENCES transmissions(id), 
-	engine_id BIGINT REFERENCES engines(id)
+	wheels_id BIGINT REFERENCES wheels(id) NOT NULL,
+	transmission_id BIGINT REFERENCES transmissions(id) NOT NULL, 
+	engine_id BIGINT REFERENCES engines(id) NOT NULL
+
 );
 
 CREATE TABLE transmissions (
