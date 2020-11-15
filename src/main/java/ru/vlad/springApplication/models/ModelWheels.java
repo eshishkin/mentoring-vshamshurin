@@ -7,11 +7,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "wheels")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ModelWheels implements Model {
+public class ModelWheels implements Model<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
@@ -19,7 +19,7 @@ public class ModelWheels implements Model {
 
     public ModelWheels() {}
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class ModelWheels implements Model {
         this.price = price;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

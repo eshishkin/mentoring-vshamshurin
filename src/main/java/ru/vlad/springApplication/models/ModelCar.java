@@ -7,26 +7,33 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cars")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ModelCar implements Model {
+public class ModelCar implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
     @Column(name = "brand")
     private String brand;
-    @Column(name = "wheels_id")
-    private long wheels_id;
-    @Column(name = "transmission_id")
-    private long transmission_id;
-    @Column(name = "engine_id")
-    private long engine_id;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "wheels_id", nullable = false)
+    private ModelWheels wheels;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "transmission_id", nullable = false)
+    private ModelTransmission transmission;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "engine_id", nullable = false)
+    private ModelEngine engine;
 
     public ModelCar() {}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,27 +45,27 @@ public class ModelCar implements Model {
         this.brand = brand;
     }
 
-    public long getWheels_id() {
-        return wheels_id;
+    public ModelWheels getWheels() {
+        return wheels;
     }
 
-    public void setWheels_id(long wheels_id) {
-        this.wheels_id = wheels_id;
+    public void setWheels(ModelWheels wheels) {
+        this.wheels = wheels;
     }
 
-    public long getTransmission_id() {
-        return transmission_id;
+    public ModelTransmission getTransmission() {
+        return transmission;
     }
 
-    public void setTransmission_id(long transmission_id) {
-        this.transmission_id = transmission_id;
+    public void setTransmission(ModelTransmission transmission) {
+        this.transmission = transmission;
     }
 
-    public long getEngine_id() {
-        return engine_id;
+    public ModelEngine getEngine() {
+        return engine;
     }
 
-    public void setEngine_id(long engine_id) {
-        this.engine_id = engine_id;
+    public void setEngine(ModelEngine engine) {
+        this.engine = engine;
     }
 }

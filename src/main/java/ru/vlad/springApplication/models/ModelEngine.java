@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "engines")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ModelEngine implements Model {
+public class ModelEngine implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
@@ -18,11 +18,11 @@ public class ModelEngine implements Model {
 
     public ModelEngine() {}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
