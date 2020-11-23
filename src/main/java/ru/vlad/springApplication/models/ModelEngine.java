@@ -3,6 +3,7 @@ package ru.vlad.springApplication.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "engines")
@@ -14,7 +15,7 @@ public class ModelEngine implements Model<Long> {
     @Column(name = "description")
     private String description;
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
 
     public ModelEngine() {}
 
@@ -34,11 +35,11 @@ public class ModelEngine implements Model<Long> {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

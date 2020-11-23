@@ -16,7 +16,7 @@ public class ModelUser implements Model<Long> {
     private String phone;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     public ModelUser() {}
 
@@ -44,7 +44,7 @@ public class ModelUser implements Model<Long> {
         this.phone = phone;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

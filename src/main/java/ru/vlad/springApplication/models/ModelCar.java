@@ -3,6 +3,8 @@ package ru.vlad.springApplication.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -26,6 +28,14 @@ public class ModelCar implements Model<Long> {
     @OneToOne(optional = false)
     @JoinColumn(name = "engine_id", nullable = false)
     private ModelEngine engine;
+
+    @ManyToMany
+    @JoinTable(
+            name = "cars_other_options",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "option_id")
+    )
+    private Set<ModelOtherOption> otherOption;
 
     public ModelCar() {}
 
@@ -67,5 +77,13 @@ public class ModelCar implements Model<Long> {
 
     public void setEngine(ModelEngine engine) {
         this.engine = engine;
+    }
+
+    public Set<ModelOtherOption> getOtherOption() {
+        return otherOption;
+    }
+
+    public void setOtherOption(Set<ModelOtherOption> otherOption) {
+        this.otherOption = otherOption;
     }
 }
