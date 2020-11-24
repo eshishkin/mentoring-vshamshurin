@@ -3,11 +3,10 @@ package ru.vlad.springApplication.services.impl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.models.ModelUser;
+import ru.vlad.springApplication.repository.UserRepository;
 import ru.vlad.springApplication.services.ServiceInterface;
 
 import java.util.List;
-
-interface UserRepository extends JpaRepository<ModelUser, Long> {}
 
 @Service
 public class UserServiceImpl implements ServiceInterface<ModelUser, Long> {

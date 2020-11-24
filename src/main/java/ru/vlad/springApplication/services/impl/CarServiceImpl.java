@@ -1,13 +1,11 @@
 package ru.vlad.springApplication.services.impl;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.models.ModelCar;
+import ru.vlad.springApplication.repository.CarRepository;
 import ru.vlad.springApplication.services.ServiceInterface;
 
 import java.util.List;
-
-interface CarRepository extends JpaRepository<ModelCar, Long> {}
 
 @Service
 public class CarServiceImpl implements ServiceInterface<ModelCar, Long> {
