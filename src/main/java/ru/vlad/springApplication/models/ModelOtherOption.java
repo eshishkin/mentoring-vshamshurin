@@ -4,27 +4,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
-@Table(name = "engines")
+@Table(name = "other_options")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ModelEngine implements Model<Long> {
+public class ModelOtherOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+    @Column(name = "name")
+    private String name;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
     private BigDecimal price;
 
-    public ModelEngine() {}
+    @ManyToMany(mappedBy = "otherOption")
+    private Set<ModelCar> carsSet;
 
-    public Long getId() {
+    public ModelOtherOption() {}
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -42,4 +56,9 @@ public class ModelEngine implements Model<Long> {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public void setCarsSet(Set<ModelCar> carsSet) {
+        this.carsSet = carsSet;
+    }
+
 }
