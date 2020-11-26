@@ -1,10 +1,17 @@
 package ru.vlad.springApplication.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "other_options")
@@ -23,7 +30,8 @@ public class ModelOtherOption {
     @ManyToMany(mappedBy = "otherOption")
     private Set<ModelCar> carsSet;
 
-    public ModelOtherOption() {}
+    public ModelOtherOption() {
+    }
 
     public long getId() {
         return id;

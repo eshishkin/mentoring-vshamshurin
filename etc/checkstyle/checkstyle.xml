@@ -141,8 +141,8 @@
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <!-- <module name="ImportControl"/> -->
         <module name="ImportOrder">
-            <property name="groups" value="java,javax,org,com"/>
-            <property name="staticGroups" value="java,javax,org,com"/>
+            <property name="groups" value="java,javax"/>
+            <property name="staticGroups" value="java,javax"/>
             <property name="separated" value="true"/>
             <property name="separatedStaticGroups" value="true"/>
             <property name="option" value="bottom"/>
