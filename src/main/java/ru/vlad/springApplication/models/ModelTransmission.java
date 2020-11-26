@@ -1,9 +1,15 @@
 package ru.vlad.springApplication.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "transmissions")
@@ -17,7 +23,8 @@ public class ModelTransmission implements Model<Long> {
     @Column(name = "price")
     private BigDecimal price;
 
-    public ModelTransmission() {}
+    public ModelTransmission() {
+    }
 
     public Long getId() {
         return id;
