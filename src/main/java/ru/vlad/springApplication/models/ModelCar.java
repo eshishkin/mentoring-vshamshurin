@@ -3,18 +3,18 @@ package ru.vlad.springApplication.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "cars")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelCar implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "brand")
+    @Column(name = "brand", nullable = false)
     private String brand;
 
     @OneToOne(optional = false)
@@ -35,9 +35,13 @@ public class ModelCar implements Model<Long> {
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id")
     )
-    private Set<ModelOtherOption> otherOption;
+    private List<ModelOtherOption> otherOption;
 
     public ModelCar() {}
+
+    public void addOtherOption(ModelOtherOption modelOtherOption) {
+        otherOption.add(modelOtherOption);
+    }
 
     public Long getId() {
         return id;
@@ -79,11 +83,23 @@ public class ModelCar implements Model<Long> {
         this.engine = engine;
     }
 
-    public Set<ModelOtherOption> getOtherOption() {
+    public List<ModelOtherOption> getOtherOption() {
         return otherOption;
     }
 
-    public void setOtherOption(Set<ModelOtherOption> otherOption) {
+    public void setOtherOption(List<ModelOtherOption> otherOption) {
         this.otherOption = otherOption;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelCar{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", wheels=" + wheels +
+                ", transmission=" + transmission +
+                ", engine=" + engine +
+                ", otherOption=" + Arrays.toString(otherOption.toArray()) +
+                '}';
     }
 }

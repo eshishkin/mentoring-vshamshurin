@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars List</title>
+</head>
+<ul>
+<form th:method="POST" th:each ="car : ${cars}" th:action="@{/cars/delete/{id}(id=${car.getId()})}">
+    <li th:utext="${car.id}"></li>
+    <br>
+    <li th:utext="${car.brand}"></li>
+    <br>
+    <li th:utext="${car.wheels.description}"></li>
+    <br>
+    <li th:utext="${car.transmission.description}"></li>
+    <br>
+    <li th:utext="${car.engine.description}"></li>
+    <p><b>Дополнительная комплектация автомобиля:</b></p>
+    <p>===================</p>
+    <th:block th:each="option : ${car.otherOption}">
+        <li th:utext="${option.description}"></li>
+        <p>===================</p>
+    </th:block>
+    <b><a th:href="@{/cars/update/{id}(id=${car.getId()})}">Изменить комплектацию</a></b>
+    <br><br>
+    <input type="submit" value="Удалить комплектацию!">
+    <p>***************</p>
+</form>
+</ul>
+</body>
+</html>

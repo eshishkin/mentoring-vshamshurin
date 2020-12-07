@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wheels List</title>
+</head>
+<body>
+<form th:method="POST" th:each ="wheels : ${wheelsList}" th:action="@{/wheels/delete/{id}(id=${wheels.getId()})}">
+    <label for="ID">ID: </label>
+    <li th:utext="${wheels.id}" id ="ID"></li>
+    <p>***************</p>
+    <label for="description">Описание: </label>
+    <li th:utext="${wheels.description}" id="description"></li>
+    <p>***************</p>
+    <label for="power">Радиус колеса: </label>
+    <li th:utext="${wheels.radius}" id="power"></li>
+    <br>
+    <label for="price">Цена: </label>
+    <li th:utext="${wheels.price}" id="price"></li>
+    <br>
+    <b><a th:href="@{/wheels/update/{id}(id=${wheels.getId()})}">Изменить колесо</a></b>
+    <br><br>
+    <input type="submit" value="Удалить колесо!">
+    <p>-------------------------------------------------------</p>
+</form>
+</body>
+</html>

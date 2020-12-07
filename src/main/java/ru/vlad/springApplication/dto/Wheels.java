@@ -1,27 +1,22 @@
-package ru.vlad.springApplication.models;
+package ru.vlad.springApplication.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "wheels")
-public class ModelWheels implements Model<Long> {
+public class Wheels {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "description")
+
     private String description;
-    @Column(name = "price")
+
     private BigDecimal price;
-    @Column(name = "radius")
+
+    public Wheels() {}
+
     private int radius;
 
-    public ModelWheels() {}
 
-    public ModelWheels(Long id, String description, BigDecimal price, int radius) {
+
+    public Wheels(Long id, String description, BigDecimal price, int radius) {
         this.id = id;
         this.description = description;
         this.price = price;
@@ -60,12 +55,4 @@ public class ModelWheels implements Model<Long> {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "ModelWheels{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

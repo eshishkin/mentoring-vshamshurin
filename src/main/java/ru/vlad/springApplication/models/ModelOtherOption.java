@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "other_options")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelOtherOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,16 @@ public class ModelOtherOption {
     private BigDecimal price;
 
     @ManyToMany(mappedBy = "otherOption")
-    private Set<ModelCar> carsSet;
+    private List<ModelCar> carsSet;
 
     public ModelOtherOption() {}
+
+    public ModelOtherOption(long id, String name, String description, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     public long getId() {
         return id;
@@ -57,8 +64,17 @@ public class ModelOtherOption {
         this.price = price;
     }
 
-    public void setCarsSet(Set<ModelCar> carsSet) {
+    public void setCarsSet(List<ModelCar> carsSet) {
         this.carsSet = carsSet;
     }
 
+    @Override
+    public String toString() {
+        return "ModelOtherOption{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

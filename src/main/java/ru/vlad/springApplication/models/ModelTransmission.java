@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "transmissions")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelTransmission implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +17,12 @@ public class ModelTransmission implements Model<Long> {
     private BigDecimal price;
 
     public ModelTransmission() {}
+
+    public ModelTransmission(Long id, String description, BigDecimal price) {
+        this.id = id;
+        this.description = description;
+        this.price = price;
+    }
 
     public Long getId() {
         return id;
@@ -41,5 +46,14 @@ public class ModelTransmission implements Model<Long> {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelTransmission{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

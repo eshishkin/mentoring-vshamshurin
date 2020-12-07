@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelUser implements Model<Long> {
     @Column(name = "name")
     private String name;
@@ -50,5 +49,15 @@ public class ModelUser implements Model<Long> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelUser{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

@@ -1,22 +1,15 @@
-package ru.vlad.springApplication.models;
+package ru.vlad.springApplication.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "engines")
-public class ModelEngine implements Model<Long> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Engine {
+
     private Long id;
-    @Column(name = "description")
+
     private String description;
-    @Column(name = "price")
+
     private BigDecimal price;
 
-    @Column(name = "power")
     private int power;
 
     public int getPower() {
@@ -27,7 +20,7 @@ public class ModelEngine implements Model<Long> {
         this.power = power;
     }
 
-    public ModelEngine() {}
+    public Engine() {}
 
     public Long getId() {
         return id;
@@ -53,12 +46,4 @@ public class ModelEngine implements Model<Long> {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "ModelEngine{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

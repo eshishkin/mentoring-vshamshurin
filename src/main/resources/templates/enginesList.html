@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Engines List</title>
+</head>
+<body>
+<form th:method="POST" th:each ="engine : ${engines}" th:action="@{/engine/delete/{id}(id=${engine.getId()})}">
+    <label for="ID">ID: </label>
+    <li th:utext="${engine.id}" id ="ID"></li>
+    <p>***************</p>
+    <label for="description">Описание: </label>
+    <li th:utext="${engine.description}" id="description"></li>
+    <p>***************</p>
+    <label for="power">Мощность: </label>
+    <li th:utext="${engine.power}" id="power"></li>
+    <br>
+    <label for="price">Цена: </label>
+    <li th:utext="${engine.price}" id="price"></li>
+    <br>
+    <b><a th:href="@{/engine/update/{id}(id=${engine.getId()})}">Изменить двигатель</a></b>
+    <br><br>
+    <input type="submit" value="Удалить двигатель!">
+    <p>-------------------------------------------------------</p>
+</form>
+</body>
+</html>
