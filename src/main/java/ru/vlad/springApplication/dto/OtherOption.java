@@ -1,9 +1,6 @@
 package ru.vlad.springApplication.dto;
 
-import ru.vlad.springApplication.models.ModelCar;
-
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class OtherOption {
 
@@ -14,8 +11,6 @@ public class OtherOption {
     private String description;
 
     private BigDecimal price;
-
-    private Set<ModelCar> carsSet;
 
     public OtherOption() {}
 
@@ -56,10 +51,6 @@ public class OtherOption {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public void setCarsSet(Set<ModelCar> carsSet) {
-        this.carsSet = carsSet;
     }
 
 }

@@ -1,11 +1,11 @@
 package ru.vlad.springApplication.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.Wheels;
 import ru.vlad.springApplication.models.ModelWheels;
 import ru.vlad.springApplication.repository.WheelsRepository;
-
-import java.util.List;
 
 @Service
 public class WheelsServiceImpl {
@@ -16,22 +16,27 @@ public class WheelsServiceImpl {
         this.wheelsRepository = wheelsRepository;
     }
 
-    public void create(ModelWheels model) {
-        wheelsRepository.save(model);
+    public void create(Wheels wheels) {
+        wheelsRepository.save(createModelWheels(wheels));
     }
 
-    public List<ModelWheels> readAll() {
-        return wheelsRepository.findAll();
+    public List<Wheels> readAll() {
+        List<ModelWheels> modelWheelsList = wheelsRepository.findAll();
+        List<Wheels> wheels = new ArrayList<>();
+        for (ModelWheels wheels1 : modelWheelsList) {
+            wheels.add(createDTOOWheels(wheels1));
+        }
+        return wheels;
     }
 
-    public ModelWheels read(Long id) {
-        return wheelsRepository.getOne(id);
+    public Wheels read(Long id) {
+        return createDTOOWheels(wheelsRepository.getOne(id));
     }
 
-    public boolean update(ModelWheels wheel, Long id) {
+    public boolean update(Wheels wheels, Long id) {
         if (wheelsRepository.existsById(id)) {
-            wheel.setId(id);
-            wheelsRepository.save(wheel);
+            wheels.setId(id);
+            wheelsRepository.save(createModelWheels(wheels));
             return true;
         }
         return false;

@@ -1,36 +1,42 @@
 package ru.vlad.springApplication.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.Engine;
 import ru.vlad.springApplication.models.ModelEngine;
 import ru.vlad.springApplication.repository.EngineRepository;
-import java.util.List;
 
 @Service
 public class EngineServiceImpl {
 
-    private final EngineRepository engineRepository;
+    protected final EngineRepository engineRepository;
 
     public EngineServiceImpl(EngineRepository engineRepository) {
         this.engineRepository = engineRepository;
     }
 
-    public void create(ModelEngine model) {
-        engineRepository.save(model);
+    public void create(Engine model) {
+        engineRepository.save(createModelEngine(model));
     }
 
-    public List<ModelEngine> readAll() {
-        return engineRepository.findAll();
+    public List<Engine> readAll() {
+        List<ModelEngine> modelEngineList = engineRepository.findAll();
+        List<Engine> engineList = new ArrayList<>();
+        for (ModelEngine modelEngine : modelEngineList) {
+            engineList.add(createDTOEngine(modelEngine));
+        }
+        return engineList;
     }
 
-    public ModelEngine read(Long id) {
-        return engineRepository.getOne(id);
+    public Engine read(Long id) {
+        return createDTOEngine(engineRepository.getOne(id));
     }
 
-    public boolean update(ModelEngine model, Long id) {
+    public boolean update(Engine model, Long id) {
         if (engineRepository.existsById(id)) {
             model.setId(id);
-            engineRepository.save(model);
+            engineRepository.save(createModelEngine(model));
             return true;
         }
         return false;

@@ -1,11 +1,13 @@
 package ru.vlad.springApplication.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
+import ru.vlad.springApplication.dto.Car;
 import ru.vlad.springApplication.dto.Transmission;
+import ru.vlad.springApplication.models.ModelCar;
 import ru.vlad.springApplication.models.ModelTransmission;
 import ru.vlad.springApplication.repository.TransmissionRepository;
-
-import java.util.List;
 
 @Service
 public class TransmissionServiceImpl {
@@ -16,22 +18,27 @@ public class TransmissionServiceImpl {
         this.transmissionRepository = transmissionRepository;
     }
 
-    public void create(ModelTransmission model) {
-        transmissionRepository.save(model);
+    public void create(Transmission transmission) {
+        transmissionRepository.save(createModelTransmission(transmission));
     }
 
-    public List<ModelTransmission> readAll() {
-        return transmissionRepository.findAll();
+    public List<Transmission> readAll() {
+        List<ModelTransmission> modelTransmissionList = transmissionRepository.findAll();
+        List<Transmission> transmissionList = new ArrayList<>();
+        for (ModelTransmission modelTransmission : modelTransmissionList) {
+            transmissionList.add(createDTOTransmission(modelTransmission));
+        }
+        return transmissionList;
     }
 
-    public ModelTransmission read(Long id) {
-        return transmissionRepository.getOne(id);
+    public Transmission read(Long id) {
+        return createDTOTransmission(transmissionRepository.getOne(id));
     }
 
-    public boolean update(ModelTransmission model, Long id) {
+    public boolean update(Transmission transmission, Long id) {
         if (transmissionRepository.existsById(id)) {
-            model.setId(id);
-            transmissionRepository.save(model);
+            transmission.setId(id);
+            transmissionRepository.save(createModelTransmission(transmission));
             return true;
         }
         return false;

@@ -1,11 +1,11 @@
 package ru.vlad.springApplication.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.OtherOption;
 import ru.vlad.springApplication.models.ModelOtherOption;
 import ru.vlad.springApplication.repository.OtherOptionRepository;
-
-import java.util.List;
 
 @Service
 public class OtherOptionServiceImpl {
@@ -16,22 +16,25 @@ public class OtherOptionServiceImpl {
         this.otherOptionRepository = otherOptionRepository;
     }
 
-    public void create(ModelOtherOption model) {
-        otherOptionRepository.save(model);
+    public void create(OtherOption otherOption) {
+        otherOptionRepository.save(createModelOtherOption(otherOption));
     }
 
-    public List<ModelOtherOption> readAll() {
-        return otherOptionRepository.findAll();
+    public List<OtherOption> readAll() {
+        List<ModelOtherOption> modelOtherOptionList = otherOptionRepository.findAll();
+        List<OtherOption> otherOptionList = new ArrayList<>();
+        modelOtherOptionList.forEach(x -> otherOptionList.add(createDTOOtherOption(x)));
+        return otherOptionList;
     }
 
-    public ModelOtherOption read(Long id) {
-        return otherOptionRepository.getOne(id);
+    public OtherOption read(Long id) {
+        return createDTOOtherOption(otherOptionRepository.getOne(id));
     }
 
-    public boolean update(ModelOtherOption model, Long id) {
+    public boolean update(OtherOption otherOption, Long id) {
         if (otherOptionRepository.existsById(id)) {
-            model.setId(id);
-            otherOptionRepository.save(model);
+            otherOption.setId(id);
+            otherOptionRepository.save(createModelOtherOption(otherOption));
             return true;
         }
         return false;

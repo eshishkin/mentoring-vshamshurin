@@ -11,6 +11,6 @@ public class AdminController {
 
     @GetMapping("/create")
     public ModelAndView createList() {
-        return new ModelAndView("adminCreateList");
+        return new ModelAndView("admin_createList");
     }
 }

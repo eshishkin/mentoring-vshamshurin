@@ -2,7 +2,10 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Engine;
 import ru.vlad.springApplication.services.impl.EngineServiceImpl;
@@ -18,19 +21,19 @@ public class EngineController {
     }
 
     @GetMapping("/create")
-    public ModelAndView engineCreateView(@ModelAttribute("engine") Engine engine) {
-        return new ModelAndView("engineCreate");
+    public ModelAndView engineCreateView(Engine engine) {
+        return new ModelAndView("engine_create", HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ModelAndView engineCreate(Engine engine) {
-        engineService.create(engineService.createModelEngine(engine));
+        engineService.create(engine);
         return new ModelAndView("redirect:/engine/list");
     }
 
     @GetMapping("/list")
     public ModelAndView listEngines() {
-        ModelAndView modelAndView = new ModelAndView("enginesList", HttpStatus.OK);
+        ModelAndView modelAndView = new ModelAndView("engine_list", HttpStatus.OK);
         modelAndView.addObject("engines", engineService.readAll());
         return modelAndView;
     }
@@ -43,14 +46,14 @@ public class EngineController {
 
     @GetMapping("/update/{id}")
     public ModelAndView engineUpdateView(@PathVariable("id") long id) {
-        ModelAndView modelAndView = new ModelAndView("editEngine");
-        modelAndView.addObject("engine", engineService.createDTOEngine(engineService.read(id)));
+        ModelAndView modelAndView = new ModelAndView("engine_edit");
+        modelAndView.addObject("engine", engineService.read(id));
         return modelAndView;
     }
 
     @PostMapping("/update/{id}")
     public ModelAndView engineUpdate(Engine engine) {
-        engineService.update(engineService.createModelEngine(engine), engine.getId());
+        engineService.update(engine, engine.getId());
         return new ModelAndView("redirect:/engine/list");
     }
 }

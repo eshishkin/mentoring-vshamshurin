@@ -27,7 +27,7 @@
     <br>
     <tr th:each="model : ${otherOptionModel}">
         <label for="otherOption">Доп. компоненты:</label>
-        <select th:field="*{otherOption_id}" id="otherOption">
+        <select th:field="*{otherOptions}" id="otherOption">
             <option th:each="oom : ${otherOptionModel}" th:value="${oom.id}" th:text="${oom.description}"></option>
         </select>
         <br>

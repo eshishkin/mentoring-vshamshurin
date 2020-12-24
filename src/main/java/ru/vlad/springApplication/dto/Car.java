@@ -1,10 +1,9 @@
 package ru.vlad.springApplication.dto;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +20,7 @@ public class Car {
 
     private Long engine_id;
 
-    private List<Long> otherOption_id;
+    private List<Long> otherOptions;
+
 
 }

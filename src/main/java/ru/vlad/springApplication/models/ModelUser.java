@@ -6,9 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class ModelUser implements Model<Long> {

@@ -1,19 +1,27 @@
 package ru.vlad.springApplication.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
 import ru.vlad.springApplication.models.ModelCar;
-import ru.vlad.springApplication.services.impl.*;
-
-import java.util.List;
+import ru.vlad.springApplication.services.impl.CarServiceImpl;
+import ru.vlad.springApplication.services.impl.EngineServiceImpl;
+import ru.vlad.springApplication.services.impl.OtherOptionServiceImpl;
+import ru.vlad.springApplication.services.impl.TransmissionServiceImpl;
+import ru.vlad.springApplication.services.impl.WheelsServiceImpl;
 
 @Controller
 @RequestMapping("/cars")
 public class CarController {
+    public static final String CARS = "car_create";
     private final CarServiceImpl carService;
     private final WheelsServiceImpl wheelsService;
     private final EngineServiceImpl engineService;
@@ -32,7 +40,7 @@ public class CarController {
 
     @GetMapping
     public ModelAndView createForm(@ModelAttribute("car") Car car) {
-        ModelAndView modelAndView = new ModelAndView("cars", HttpStatus.OK);
+        ModelAndView modelAndView = new ModelAndView(CARS, HttpStatus.OK);
         modelAndView.addObject("wheelsModel", wheelsService.readAll());
         modelAndView.addObject("enginesModel", engineService.readAll());
         modelAndView.addObject("transmissionsModel", transmissionService.readAll());
@@ -41,15 +49,15 @@ public class CarController {
     }
 
     @PostMapping(value = "/create")
-    public ModelAndView createCar(@ModelAttribute("car") Car car) {
-        carService.actionCreateModelCar(car);
+    public ModelAndView createCar(Car car) {
+        carService.create(car);
         return new ModelAndView("redirect:/cars", HttpStatus.CREATED);
     }
 
     @GetMapping("/update/{id}")
     public ModelAndView editCar(@PathVariable("id") long id) {
-        ModelAndView modelAndView = new ModelAndView("carEdit", HttpStatus.OK);
-        modelAndView.addObject("car", carService.createDTOCar(carService.read(id)));
+        ModelAndView modelAndView = new ModelAndView("car_edit", HttpStatus.OK);
+        modelAndView.addObject("car", carService.read(id));
         modelAndView.addObject("wheelsModel", wheelsService.readAll());
         modelAndView.addObject("enginesModel", engineService.readAll());
         modelAndView.addObject("transmissionsModel", transmissionService.readAll());
@@ -59,20 +67,20 @@ public class CarController {
 
     @PostMapping(value = "/update/{id}")
     public ModelAndView updateCar(@PathVariable(name = "id") long id,@ModelAttribute("car") Car car) {
-        carService.actionUpdateModelCar(car);
-        return new ModelAndView("redirect:/cars/list", HttpStatus.OK);
+        carService.update(car, car.getId());
+        return new ModelAndView("redirect:/cars/list");
     }
 
     @PostMapping("/delete/{id}")
     public ModelAndView deleteCar(@PathVariable(name = "id") long id) {
-        final boolean deleted = carService.delete(id);
-        return new ModelAndView("redirect:/cars/list", HttpStatus.OK);
+        carService.delete(id);
+        return new ModelAndView("redirect:/cars/list");
     }
 
     @GetMapping("/list")
-    public ModelAndView read(Model model) {
-        final List<ModelCar> cars = carService.readAll();
-        model.addAttribute("cars", cars);
-        return new ModelAndView("carsList");
+    public ModelAndView read() {
+        ModelAndView model = new ModelAndView("car_list", HttpStatus.OK);
+        model.addObject("cars", carService.readAllModelCar());
+        return model;
     }
 }
