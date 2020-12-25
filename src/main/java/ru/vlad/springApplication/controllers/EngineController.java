@@ -14,6 +14,7 @@ import ru.vlad.springApplication.services.impl.EngineServiceImpl;
 @RequestMapping("/engine")
 public class EngineController {
 
+    public static final String REDIRECT_ENGINE_LIST = "redirect:/engine/list";
     private final EngineServiceImpl engineService;
 
     public EngineController(EngineServiceImpl engineService) {
@@ -25,10 +26,11 @@ public class EngineController {
         return new ModelAndView("engine_create", HttpStatus.OK);
     }
 
+
     @PostMapping("/create")
     public ModelAndView engineCreate(Engine engine) {
         engineService.create(engine);
-        return new ModelAndView("redirect:/engine/list");
+        return new ModelAndView(REDIRECT_ENGINE_LIST);
     }
 
     @GetMapping("/list")
@@ -41,7 +43,7 @@ public class EngineController {
     @PostMapping("/delete/{id}")
     public ModelAndView engineDelete(@PathVariable("id") long id) {
         engineService.delete(id);
-        return new ModelAndView("redirect:/engine/list");
+        return new ModelAndView(REDIRECT_ENGINE_LIST);
     }
 
     @GetMapping("/update/{id}")
@@ -54,6 +56,6 @@ public class EngineController {
     @PostMapping("/update/{id}")
     public ModelAndView engineUpdate(Engine engine) {
         engineService.update(engine, engine.getId());
-        return new ModelAndView("redirect:/engine/list");
+        return new ModelAndView(REDIRECT_ENGINE_LIST);
     }
 }

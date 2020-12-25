@@ -52,12 +52,4 @@ public class ModelTransmission implements Model<Long> {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "ModelTransmission{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

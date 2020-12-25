@@ -72,13 +72,4 @@ public class ModelOtherOption {
         this.carsSet = carsSet;
     }
 
-    @Override
-    public String toString() {
-        return "ModelOtherOption{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

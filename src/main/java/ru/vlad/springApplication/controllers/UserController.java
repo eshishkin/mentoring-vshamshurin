@@ -21,6 +21,7 @@ import ru.vlad.springApplication.services.impl.UserServiceImpl;
 public class UserController {
 
     private final UserServiceImpl serviceInterface;
+
     public UserController(UserServiceImpl serviceInterface) {
         this.serviceInterface = serviceInterface;
     }
@@ -52,11 +53,11 @@ public class UserController {
     public ModelAndView read(Model model) {
         final List<User> users = serviceInterface.readAll();
         model.addAttribute("users", users);
-
-        if (users != null)
+        if (users != null) {
             return new ModelAndView("user_list", HttpStatus.OK);
-        else
+        } else {
             return new ModelAndView("redirect:/engine/list", HttpStatus.NOT_FOUND);
+        }
     }
 
 }

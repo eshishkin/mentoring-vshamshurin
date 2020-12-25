@@ -24,13 +24,13 @@ public class WheelsServiceImpl {
         List<ModelWheels> modelWheelsList = wheelsRepository.findAll();
         List<Wheels> wheels = new ArrayList<>();
         for (ModelWheels wheels1 : modelWheelsList) {
-            wheels.add(createDTOOWheels(wheels1));
+            wheels.add(createDtoWheels(wheels1));
         }
         return wheels;
     }
 
     public Wheels read(Long id) {
-        return createDTOOWheels(wheelsRepository.getOne(id));
+        return createDtoWheels(wheelsRepository.getOne(id));
     }
 
     public boolean update(Wheels wheels, Long id) {
@@ -55,7 +55,7 @@ public class WheelsServiceImpl {
     }
 
 
-    public Wheels createDTOOWheels(ModelWheels modelWheels) {
+    public Wheels createDtoWheels(ModelWheels modelWheels) {
         return new Wheels(modelWheels.getId(), modelWheels.getDescription(), modelWheels.getPrice(),
                 modelWheels.getRadius());
     }

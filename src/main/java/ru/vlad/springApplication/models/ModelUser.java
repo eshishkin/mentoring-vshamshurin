@@ -57,13 +57,4 @@ public class ModelUser implements Model<Long> {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "ModelUser{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", id=" + id +
-                '}';
-    }
 }

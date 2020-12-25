@@ -55,13 +55,4 @@ public class ModelEngine implements Model<Long> {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    @Override
-    public String toString() {
-        return "ModelEngine{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

@@ -17,11 +17,11 @@ public class Car {
 
     private String brand;
 
-    private Long wheels_id;
+    private Long wheelsId;
 
-    private Long transmission_id;
+    private Long transmissionId;
 
-    private Long engine_id;
+    private Long engineId;
 
     private List<Long> otherOptions;
 

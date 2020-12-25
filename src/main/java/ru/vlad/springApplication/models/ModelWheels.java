@@ -22,7 +22,8 @@ public class ModelWheels implements Model<Long> {
     @Column(name = "radius")
     private int radius;
 
-    public ModelWheels() {}
+    public ModelWheels() {
+    }
 
     public ModelWheels(Long id, String description, BigDecimal price, int radius) {
         this.id = id;
@@ -61,14 +62,5 @@ public class ModelWheels implements Model<Long> {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "ModelWheels{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
     }
 }

@@ -3,9 +3,7 @@ package ru.vlad.springApplication.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import ru.vlad.springApplication.dto.Car;
 import ru.vlad.springApplication.dto.Transmission;
-import ru.vlad.springApplication.models.ModelCar;
 import ru.vlad.springApplication.models.ModelTransmission;
 import ru.vlad.springApplication.repository.TransmissionRepository;
 

@@ -1,7 +1,5 @@
 package ru.vlad.springApplication.models;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "cars")
@@ -97,17 +94,5 @@ public class ModelCar implements Model<Long> {
 
     public void setOtherOption(List<ModelOtherOption> otherOption) {
         this.otherOption = otherOption;
-    }
-
-    @Override
-    public String toString() {
-        return "ModelCar{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
-                ", wheels=" + wheels +
-                ", transmission=" + transmission +
-                ", engine=" + engine +
-                ", otherOption=" + Arrays.toString(otherOption.toArray()) +
-                '}';
     }
 }

@@ -15,6 +15,7 @@ import ru.vlad.springApplication.services.impl.TransmissionServiceImpl;
 @RequestMapping("/transmission")
 public class TransmissionController {
 
+    public static final String REDIRECT_TRANSMISSION_LIST = "redirect:/transmission/list";
     private final TransmissionServiceImpl transmissionService;
 
     public TransmissionController(TransmissionServiceImpl transmissionService) {
@@ -29,7 +30,7 @@ public class TransmissionController {
     @PostMapping("/create")
     public ModelAndView transmissionCreate(Transmission transmission) {
         transmissionService.create(transmission);
-        return new ModelAndView("redirect:/transmission/list");
+        return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
 
     @GetMapping("/list")
@@ -42,7 +43,7 @@ public class TransmissionController {
     @PostMapping("/delete/{id}")
     public ModelAndView transmissionDelete(@PathVariable("id") long id) {
         transmissionService.delete(id);
-        return new ModelAndView("redirect:/transmission/list");
+        return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
 
     @GetMapping("/update/{id}")
@@ -52,9 +53,11 @@ public class TransmissionController {
         return modelAndView;
     }
 
+
+
     @PostMapping("/update/{id}")
     public ModelAndView transmissionUpdate(Transmission transmission) {
         transmissionService.update(transmission, transmission.getId());
-        return new ModelAndView("redirect:/transmission/list");
+        return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
 }

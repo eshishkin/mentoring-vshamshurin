@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.Car;
-import ru.vlad.springApplication.dto.OtherOption;
 import ru.vlad.springApplication.models.ModelCar;
 import ru.vlad.springApplication.models.ModelOtherOption;
 import ru.vlad.springApplication.repository.CarRepository;
@@ -83,10 +82,10 @@ public class CarServiceImpl {
         ModelCar modelCar = new ModelCar();
         modelCar.setId(car.getId());
         modelCar.setBrand(car.getBrand());
-        modelCar.setEngine(engineService.createModelEngine(engineService.read(car.getEngine_id())));
+        modelCar.setEngine(engineService.createModelEngine(engineService.read(car.getEngineId())));
         modelCar.setTransmission(transmissionService.createModelTransmission(
-                transmissionService.read(car.getTransmission_id())));
-        modelCar.setWheels(wheelsService.createModelWheels(wheelsService.read(car.getWheels_id())));
+                transmissionService.read(car.getTransmissionId())));
+        modelCar.setWheels(wheelsService.createModelWheels(wheelsService.read(car.getWheelsId())));
         List<ModelOtherOption> otherOption = new ArrayList<>();
         for (int i = 0; i < car.getOtherOptions().size(); i++) {
             otherOption.add(otherOptionService.createModelOtherOption(otherOptionService
@@ -101,9 +100,9 @@ public class CarServiceImpl {
         Car carDTO = new Car();
         carDTO.setBrand(car.getBrand());
         carDTO.setId(car.getId());
-        carDTO.setEngine_id(engineService.createDTOEngine(car.getEngine()).getId());
-        carDTO.setTransmission_id(transmissionService.createDTOTransmission(car.getTransmission()).getId());
-        carDTO.setWheels_id(wheelsService.createDTOOWheels(car.getWheels()).getId());
+        carDTO.setEngineId(engineService.createDTOEngine(car.getEngine()).getId());
+        carDTO.setTransmissionId(transmissionService.createDTOTransmission(car.getTransmission()).getId());
+        carDTO.setWheelsId(wheelsService.createDtoWheels(car.getWheels()).getId());
         List<Long> options = new ArrayList<>();
         for (ModelOtherOption otherOption : car.getOtherOption()) {
             options.add(otherOptionService.createDTOOtherOption(otherOption).getId());
