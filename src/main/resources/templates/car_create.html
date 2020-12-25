@@ -24,14 +24,17 @@
         <option th:each="eng : ${enginesModel}" th:value="${eng.getId()}" th:text="${eng.description}"></option>
     </select>
     <br>
-    <tr th:each="model : ${otherOptionModel}">
+    <p th:each="model : ${otherOptionModel}">
     <label for="otherOption">Доп. компоненты:</label>
     <select th:field="*{otherOptions}" id="otherOption">
         <option th:each="oom : ${otherOptionModel}" th:value="${oom.getId()}" th:text="${oom.description}"></option>
     </select>
     <br>
-    </tr>
-        <input type="submit" value="Сохранить комплектацию!"/>
+    </p>
+    <label for="price">Общая цена: </label>
+    <p th:utext="*{price}" id="price"></p>
+    <input type="submit" value="Купить!"/>
+    <input type="submit" th:action="@{/cars/price}" value="Расчитать цену!">
 </form>
 </body>
 </html>

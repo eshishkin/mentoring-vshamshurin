@@ -1,6 +1,7 @@
 package ru.vlad.springApplication.services.impl;
 
 import com.sun.istack.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,17 @@ public class CarServiceImpl {
         return false;
     }
 
+    public BigDecimal getPrice(Car car) {
+        ModelCar modelCar = createModelCar(car);
+        BigDecimal price = new BigDecimal("0.0");
+        price = price.add(modelCar.getEngine().getPrice()).add(modelCar.getTransmission().getPrice())
+                .add(modelCar.getWheels().getPrice());
+        for (ModelOtherOption modelOtherOption : modelCar.getOtherOption()) {
+            price = price.add(modelOtherOption.getPrice());
+        }
+        return price;
+    }
+
     public ModelCar createModelCar(@NotNull Car car) {
         ModelCar modelCar = new ModelCar();
         modelCar.setId(car.getId());
@@ -84,16 +96,17 @@ public class CarServiceImpl {
         return modelCar;
     }
 
+
     public Car createDTOCar(@NotNull ModelCar car) {
         Car carDTO = new Car();
         carDTO.setBrand(car.getBrand());
         carDTO.setId(car.getId());
-        carDTO.setEngine_id(car.getEngine().getId());
-        carDTO.setTransmission_id(car.getTransmission().getId());
-        carDTO.setWheels_id(car.getWheels().getId());
+        carDTO.setEngine_id(engineService.createDTOEngine(car.getEngine()).getId());
+        carDTO.setTransmission_id(transmissionService.createDTOTransmission(car.getTransmission()).getId());
+        carDTO.setWheels_id(wheelsService.createDTOOWheels(car.getWheels()).getId());
         List<Long> options = new ArrayList<>();
         for (ModelOtherOption otherOption : car.getOtherOption()) {
-            options.add(otherOption.getId());
+            options.add(otherOptionService.createDTOOtherOption(otherOption).getId());
         }
         carDTO.setOtherOptions(options);
         return carDTO;

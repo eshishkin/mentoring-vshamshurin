@@ -18,9 +18,9 @@ public class ModelEngine implements Model<Long> {
     private String description;
     @Column(name = "price")
     private BigDecimal price;
-
     @Column(name = "power")
     private int power;
+
 
     public int getPower() {
         return power;

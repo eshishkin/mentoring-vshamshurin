@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
@@ -54,6 +55,13 @@ public class CarController {
         return new ModelAndView("redirect:/cars", HttpStatus.CREATED);
     }
 
+    @PostMapping("/price")
+    public ModelAndView getPrice(Car car) {
+        ModelAndView model = new ModelAndView("redirect:/cars");
+        car.setPrice(carService.getPrice(car));
+        return model;
+    }
+
     @GetMapping("/update/{id}")
     public ModelAndView editCar(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("car_edit", HttpStatus.OK);
@@ -66,8 +74,8 @@ public class CarController {
     }
 
     @PostMapping(value = "/update/{id}")
-    public ModelAndView updateCar(@PathVariable(name = "id") long id,@ModelAttribute("car") Car car) {
-        carService.update(car, car.getId());
+    public ModelAndView updateCar(@PathVariable(name = "id") long id, Car car) {
+        carService.update(car, id);
         return new ModelAndView("redirect:/cars/list");
     }
 
