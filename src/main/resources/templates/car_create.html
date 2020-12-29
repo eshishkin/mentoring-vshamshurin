@@ -10,17 +10,17 @@
         <input type="text" id="brand" th:field="*{brand}">
     <br>
     <label for="wheels">Колёса:</label>
-    <select th:field="*{getWheelsId}" id="wheels">
+    <select th:field="*{wheelsId}" id="wheels">
         <option th:each="wh : ${wheelsModel}" th:value="${wh.getId()}" th:text="${wh.description}"></option>
     </select>
     <br>
     <label for="transmission">Трансмиссия:</label>
-    <select th:field="*{getTransmissionId}" id="transmission">
+    <select th:field="*{transmissionId}" id="transmission">
         <option th:each="trans : ${transmissionsModel}" th:value="${trans.getId()}" th:text="${trans.description}"></option>
     </select>
     <br>
     <label for="engine">Двигатель:</label>
-    <select th:field="*{getEngineId}" id="engine">
+    <select th:field="*{engineId}" id="engine">
         <option th:each="eng : ${enginesModel}" th:value="${eng.getId()}" th:text="${eng.description}"></option>
     </select>
     <br>
@@ -33,8 +33,8 @@
     </p>
     <label for="price">Общая цена: </label>
     <p th:utext="${price}" id="price"></p>
-    <input type="submit" value="Купить!"/>
-    <input type="submit" th:formaction="@{/cars/price}" value="Расчитать цену!">
+    <input type="submit" name="Operation" onclick="document.pressed=this.value" value="Купить!">
+    <input th:formaction="@{/cars/price}" type="submit" value="Расчитать цену"/>
 </form>
 </body>
 </html>

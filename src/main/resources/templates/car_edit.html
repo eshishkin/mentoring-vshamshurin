@@ -11,17 +11,17 @@
     <input type="text" id="brand" th:field="*{brand}">
     <br>
     <label for="wheels">Колёса:</label>
-    <select th:field="*{getWheelsId}" id="wheels">
+    <select th:field="*{wheelsId}" id="wheels">
         <option th:each="wh : ${wheelsModel}" th:value="${wh.id}" th:text="${wh.description}"></option>
     </select>
     <br>
     <label for="transmission">Трансмиссия:</label>
-    <select th:field="*{getTransmissionId}" id="transmission">
+    <select th:field="*{transmissionId}" id="transmission">
         <option th:each="trans : ${transmissionsModel}" th:value="${trans.id}" th:text="${trans.description}"></option>
     </select>
     <br>
     <label for="engine">Двигатель:</label>
-    <select th:field="*{getEngineId}" id="engine">
+    <select th:field="*{engineId}" id="engine">
         <option th:each="eng : ${enginesModel}" th:value="${eng.id}" th:text="${eng.description}"></option>
     </select>
     <br>
@@ -34,6 +34,5 @@
     </tr>
     <input type="submit" value="Обновить комплектацию!"/>
 </form>
-
 </body>
 </html>

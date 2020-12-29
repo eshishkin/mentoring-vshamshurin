@@ -1,6 +1,5 @@
 package ru.vlad.springApplication.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +23,5 @@ public class Car {
     private Long engineId;
 
     private List<Long> otherOptions;
-
-    private BigDecimal price = new BigDecimal("0.00");
-
 
 }
