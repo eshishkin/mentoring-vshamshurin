@@ -1,7 +1,6 @@
 package ru.vlad.springApplication.models;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +12,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "cars")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelCar implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "brand")
+    @Column(name = "brand", nullable = false)
     private String brand;
 
     @OneToOne(optional = false)
@@ -44,9 +40,12 @@ public class ModelCar implements Model<Long> {
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id")
     )
-    private Set<ModelOtherOption> otherOption;
+    private List<ModelOtherOption> otherOption;
 
-    public ModelCar() {
+    public ModelCar() {}
+
+    public void addOtherOption(ModelOtherOption modelOtherOption) {
+        otherOption.add(modelOtherOption);
     }
 
     public Long getId() {
@@ -89,11 +88,11 @@ public class ModelCar implements Model<Long> {
         this.engine = engine;
     }
 
-    public Set<ModelOtherOption> getOtherOption() {
+    public List<ModelOtherOption> getOtherOption() {
         return otherOption;
     }
 
-    public void setOtherOption(Set<ModelOtherOption> otherOption) {
+    public void setOtherOption(List<ModelOtherOption> otherOption) {
         this.otherOption = otherOption;
     }
 }

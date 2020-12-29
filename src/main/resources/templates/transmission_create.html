@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transmission Create</title>
+</head>
+<body>
+<form th:action="@{/transmission/create}" th:method="post" th:object="${transmission}">
+    <label for="description">Описание:</label>
+    <input type="text" id="description" th:field="*{description}">
+    <br/>
+    <label for="price">Цена:</label>
+    <input type="text" id="price" th:field="*{price}">
+    <br/>
+    <input type="submit" value="Сохранить комплектацию!"/>
+</form>
+</body>
+</html>

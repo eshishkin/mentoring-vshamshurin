@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transmissions List</title>
+</head>
+<body>
+<form th:method="POST" th:each ="transmission : ${transmissions}" th:action="@{/transmission/delete/{id}(id=${transmission.getId()})}">
+    <label for="ID">ID: </label>
+    <li th:utext="${transmission.id}" id ="ID"></li>
+    <p>***************</p>
+    <label for="description">Описание: </label>
+    <li th:utext="${transmission.description}" id="description"></li>
+    <p>***************</p>
+    <label for="price">Цена: </label>
+    <li th:utext="${transmission.price}" id="price"></li>
+    <br>
+    <b><a th:href="@{/transmission/update/{id}(id=${transmission.getId()})}">Изменить трансмиссию</a></b>
+    <br><br>
+    <input type="submit" value="Удалить трансмиссию!">
+    <p>-------------------------------------------------------</p>
+</form>
+</body>
+</html>

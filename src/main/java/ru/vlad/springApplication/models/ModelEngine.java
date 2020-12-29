@@ -1,7 +1,6 @@
 package ru.vlad.springApplication.models;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "engines")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelEngine implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +18,19 @@ public class ModelEngine implements Model<Long> {
     private String description;
     @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "power")
+    private int power;
 
-    public ModelEngine() {
+
+    public int getPower() {
+        return power;
     }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public ModelEngine() {}
 
     public Long getId() {
         return id;

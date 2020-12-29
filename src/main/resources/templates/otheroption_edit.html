@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Option</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/otherOption/update/{id}(id=${otherOption.getId()})}" th:object ="${otherOption}">
+    <label for="name">Название опции: </label>
+    <input type="text" id="name" th:field="*{name}">
+    <br/>
+    <label for="description">Описание: </label>
+    <input type="text" id="description" th:field="*{description}">
+    <br/>
+    <label for="price">Цена:</label>
+    <input type="text" id="price" th:field="*{price}">
+    <br/>
+    <input type="submit" value="Сохранить комплектацию!"/>
+</form>
+</body>
+</html>

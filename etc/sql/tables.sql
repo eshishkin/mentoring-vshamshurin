@@ -42,7 +42,6 @@ CREATE TABLE other_options (
 	price NUMERIC(9, 2) NOT NULL
 );
 
-
 CREATE TABLE cars_other_options (
     car_id BIGSERIAL REFERENCES cars(id),
     option_id BIGSERIAL REFERENCES other_options(id)

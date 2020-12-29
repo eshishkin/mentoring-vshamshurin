@@ -6,12 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelUser implements Model<Long> {
     @Column(name = "name")
     private String name;
@@ -57,4 +56,5 @@ public class ModelUser implements Model<Long> {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

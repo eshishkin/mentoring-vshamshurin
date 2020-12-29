@@ -1,8 +1,7 @@
 package ru.vlad.springApplication.models;
 
 import java.math.BigDecimal;
-import java.util.Set;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "other_options")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelOtherOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +24,16 @@ public class ModelOtherOption {
     private BigDecimal price;
 
     @ManyToMany(mappedBy = "otherOption")
-    private Set<ModelCar> carsSet;
+    private List<ModelCar> carsSet;
 
     public ModelOtherOption() {
+    }
+
+    public ModelOtherOption(long id, String name, String description, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     public long getId() {
@@ -65,7 +68,7 @@ public class ModelOtherOption {
         this.price = price;
     }
 
-    public void setCarsSet(Set<ModelCar> carsSet) {
+    public void setCarsSet(List<ModelCar> carsSet) {
         this.carsSet = carsSet;
     }
 

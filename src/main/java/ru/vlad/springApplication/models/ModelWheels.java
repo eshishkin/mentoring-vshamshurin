@@ -1,7 +1,6 @@
 package ru.vlad.springApplication.models;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "wheels")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ModelWheels implements Model<Long> {
 
     @Id
@@ -23,8 +19,26 @@ public class ModelWheels implements Model<Long> {
     private String description;
     @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "radius")
+    private int radius;
 
-    public ModelWheels() {}
+    public ModelWheels() {
+    }
+
+    public ModelWheels(Long id, String description, BigDecimal price, int radius) {
+        this.id = id;
+        this.description = description;
+        this.price = price;
+        this.radius = radius;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
 
     public void setId(Long id) {
         this.id = id;
