@@ -19,6 +19,7 @@
 		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
 		<spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+		<findbugs.annotations.version>3.0.1</findbugs.annotations.version>
 	</properties>
 	
 	<dependencies>
@@ -76,6 +77,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>${findbugs.annotations.version}</version>
+		</dependency>
     </dependencies>
 
 	<build>

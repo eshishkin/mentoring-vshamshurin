@@ -15,6 +15,7 @@ import ru.vlad.springApplication.services.impl.OtherOptionServiceImpl;
 @RequestMapping("/otherOption")
 public class OtherOptionsController {
 
+    private static final String REDIRECT_TO_OPTION_LIST = "redirect:/otherOption/list";
     private final OtherOptionServiceImpl otherOptionService;
 
     public OtherOptionsController(OtherOptionServiceImpl otherOptionService) {
@@ -29,7 +30,7 @@ public class OtherOptionsController {
     @PostMapping("/create")
     public ModelAndView otherOptionCreate(OtherOption otherOption) {
         otherOptionService.create(otherOption);
-        return new ModelAndView("redirect:/otherOption/list");
+        return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }
 
     @GetMapping("/list")
@@ -42,7 +43,7 @@ public class OtherOptionsController {
     @PostMapping("/delete/{id}")
     public ModelAndView otherOptionDelete(@PathVariable("id") long id) {
         otherOptionService.delete(id);
-        return new ModelAndView("redirect:/otherOption/list");
+        return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }
 
     @GetMapping("/update/{id}")
@@ -55,7 +56,7 @@ public class OtherOptionsController {
     @PostMapping("/update/{id}")
     public ModelAndView otherOptionUpdate(OtherOption otherOption) {
         otherOptionService.update(otherOption, otherOption.getId());
-        return new ModelAndView("redirect:/otherOption/list");
+        return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }
 
 }

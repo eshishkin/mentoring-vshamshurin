@@ -1,6 +1,8 @@
 package ru.vlad.springApplication.controllers;
 
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{id}")
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         final User user = serviceInterface.read(id);
         return user != null
@@ -50,6 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
     public ModelAndView read(Model model) {
         final List<User> users = serviceInterface.readAll();
         model.addAttribute("users", users);

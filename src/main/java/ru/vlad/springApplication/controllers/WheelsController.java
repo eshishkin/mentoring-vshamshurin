@@ -15,6 +15,7 @@ import ru.vlad.springApplication.services.impl.WheelsServiceImpl;
 @RequestMapping("/wheels")
 public class WheelsController {
 
+    private static final String REDIRECT_TO_WHEEL_LIST = "redirect:/wheels/list";
     private final WheelsServiceImpl wheelsService;
 
     public WheelsController(WheelsServiceImpl wheelsService) {
@@ -29,7 +30,7 @@ public class WheelsController {
     @PostMapping("/create")
     public ModelAndView wheelsCreate(Wheels wheels) {
         wheelsService.create(wheels);
-        return new ModelAndView("redirect:/wheels/list");
+        return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
 
     @GetMapping("/list")
@@ -42,7 +43,7 @@ public class WheelsController {
     @PostMapping("/delete/{id}")
     public ModelAndView wheelsDelete(@PathVariable("id") long id) {
         wheelsService.delete(id);
-        return new ModelAndView("redirect:/wheels/list");
+        return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
 
     @GetMapping("/update/{id}")
@@ -55,6 +56,6 @@ public class WheelsController {
     @PostMapping("/update/{id}")
     public ModelAndView wheelsOptionUpdate(Wheels wheels) {
         wheelsService.update(wheels, wheels.getId());
-        return new ModelAndView("redirect:/wheels/list");
+        return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
 }
