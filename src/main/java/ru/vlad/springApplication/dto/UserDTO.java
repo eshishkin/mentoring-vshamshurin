@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class UserDTO {
 
     private String name;
 
@@ -17,7 +17,12 @@ public class User {
 
     private Long id;
 
-    public User() {}
+    private String role;
+
+    private String password;
+
+
+    public UserDTO() {}
 
 
 

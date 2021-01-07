@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.vlad.springApplication.dto.User;
+import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.services.impl.UserServiceImpl;
 
 @Controller
@@ -29,21 +29,21 @@ public class UserController {
     }
 
     @PostMapping(value = "/create")
-    public void create(@RequestBody User user) {
+    public void create(@RequestBody UserDTO user) {
         serviceInterface.create(user);
     }
 
     @GetMapping("/get/{id}")
     @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-        final User user = serviceInterface.read(id);
+    public ResponseEntity<UserDTO> getUser(@PathVariable("id") long id) {
+        final UserDTO user = serviceInterface.read(id);
         return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping(value = "/update/{id}")
-    public void update(@PathVariable(name = "id") long id, @RequestBody User user) {
+    public void update(@PathVariable(name = "id") long id, @RequestBody UserDTO user) {
         serviceInterface.update(user, id);
     }
 
@@ -55,7 +55,7 @@ public class UserController {
     @GetMapping("/list")
     @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
     public ModelAndView read(Model model) {
-        final List<User> users = serviceInterface.readAll();
+        final List<UserDTO> users = serviceInterface.readAll();
         model.addAttribute("users", users);
         if (users != null) {
             return new ModelAndView("user_list", HttpStatus.OK);

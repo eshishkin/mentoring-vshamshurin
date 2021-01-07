@@ -22,6 +22,10 @@ public class ModelUser implements Model<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String role;
+
+    private String password;
+
     public ModelUser() {
     }
 
@@ -57,4 +61,19 @@ public class ModelUser implements Model<Long> {
         this.id = id;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
