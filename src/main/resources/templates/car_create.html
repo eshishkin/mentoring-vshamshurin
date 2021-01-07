@@ -31,9 +31,7 @@
     </select>
     <br>
     </p>
-    <label for="price">Общая цена: </label>
-    <p th:utext="${price}" id="price"></p>
-    <input type="submit" name="Operation" onclick="document.pressed=this.value" value="Купить!">
+    <input type="submit" value="Купить!">
     <input th:formaction="@{/cars/price}" type="submit" value="Расчитать цену"/>
 </form>
 </body>
