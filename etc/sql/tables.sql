@@ -3,6 +3,8 @@ CREATE TABLE users (
     name character varying(50) NOT NULL,
     email character varying(150) NOT NULL,
     phone character varying(50) NOT NULL,
+    password varchar(100) not null,
+    role integer not null,
 	UNIQUE (email)
 );
 

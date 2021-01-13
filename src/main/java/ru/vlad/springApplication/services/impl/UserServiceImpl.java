@@ -3,6 +3,7 @@ package ru.vlad.springApplication.services.impl;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.models.ModelUser;
+import ru.vlad.springApplication.models.Role;
 import ru.vlad.springApplication.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class UserServiceImpl {
     }
 
     public ModelUser createModelUser(UserDTO user) {
-        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(), user.getRole(),
+        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(), Role.valueOf(user.getRole()),
                 user.getPassword());
     }
 

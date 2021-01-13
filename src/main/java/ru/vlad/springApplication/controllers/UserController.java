@@ -1,16 +1,15 @@
 package ru.vlad.springApplication.controllers;
 
-import java.util.List;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.services.impl.UserServiceImpl;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")

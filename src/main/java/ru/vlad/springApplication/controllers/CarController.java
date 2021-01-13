@@ -1,21 +1,13 @@
 package ru.vlad.springApplication.controllers;
 
-import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
-import ru.vlad.springApplication.services.impl.CarServiceImpl;
-import ru.vlad.springApplication.services.impl.EngineServiceImpl;
-import ru.vlad.springApplication.services.impl.OtherOptionServiceImpl;
-import ru.vlad.springApplication.services.impl.TransmissionServiceImpl;
-import ru.vlad.springApplication.services.impl.WheelsServiceImpl;
+import ru.vlad.springApplication.services.impl.*;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/cars")

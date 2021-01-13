@@ -5,8 +5,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import ru.vlad.springApplication.models.Role;
 import ru.vlad.springApplication.services.impl.CustomUserDetailsService;
 
 @EnableWebSecurity
@@ -32,14 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/users/list").hasAnyRole( "ADMIN")
-                .antMatchers("/admin/**").hasRole( "ADMIN")
-                .antMatchers("/engine/**").hasRole("ADMIN")
-                .antMatchers("/wheels/**").hasRole("ADMIN")
-                .antMatchers("/transmission/**").hasRole("ADMIN")
-                .antMatchers("/otherOption/**").hasRole("ADMIN")
-                .antMatchers("/cars/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/users/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/users/list").hasRole(Role.ADMIN.name())
+                .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/engine/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/wheels/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/transmission/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/otherOption/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/users/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/cars/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .antMatchers("/**").permitAll()
                 .and().formLogin().
                 loginPage("/login")
