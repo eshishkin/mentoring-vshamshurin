@@ -37,6 +37,7 @@ public class UserController {
     @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
     public ResponseEntity<UserDTO> getUser(@PathVariable("id") long id) {
         final UserDTO user = serviceInterface.read(id);
+        System.out.println("Hello World");
         return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
