@@ -62,7 +62,7 @@ public class CarController {
         return model;
     }
 
-    @GetMapping("/update/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView editCar(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("car_edit", HttpStatus.OK);
         modelAndView.addObject("car", carService.read(id));

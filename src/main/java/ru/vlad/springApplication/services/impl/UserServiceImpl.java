@@ -1,5 +1,6 @@
 package ru.vlad.springApplication.services.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.models.ModelUser;
@@ -13,9 +14,11 @@ import java.util.List;
 public class UserServiceImpl {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void create(UserDTO user) {
@@ -52,7 +55,7 @@ public class UserServiceImpl {
 
     public ModelUser createModelUser(UserDTO user) {
         return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(), Role.valueOf(user.getRole()),
-                user.getPassword());
+                passwordEncoder.encode(user.getPassword()));
     }
 
     public UserDTO createDTOUser(ModelUser modelUser) {
