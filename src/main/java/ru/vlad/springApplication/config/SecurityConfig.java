@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.vlad.springApplication.models.Role;
 import ru.vlad.springApplication.services.impl.CustomUserDetailsService;
@@ -22,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @SuppressWarnings("MagicNumber")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
@@ -47,8 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/cars/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .antMatchers("/**").permitAll()
-                .and().formLogin().
-                loginPage("/login")
+                .and().formLogin()
+                .loginPage("/login")
                 .loginProcessingUrl("/perform-login")
                 .usernameParameter("user")
                 .passwordParameter("pass")

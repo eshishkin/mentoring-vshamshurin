@@ -54,8 +54,8 @@ public class UserServiceImpl {
     }
 
     public ModelUser createModelUser(UserDTO user) {
-        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(), Role.valueOf(user.getRole()),
-                passwordEncoder.encode(user.getPassword()));
+        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(),
+                Role.valueOf(user.getRole()), passwordEncoder.encode(user.getPassword()));
     }
 
     public UserDTO createDTOUser(ModelUser modelUser) {

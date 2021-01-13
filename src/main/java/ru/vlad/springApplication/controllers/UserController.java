@@ -26,6 +26,7 @@ public class UserController {
         return new ModelAndView("user_create");
     }
 
+    @SuppressWarnings("MultipleStringLiterals")
     @PostMapping(value = "/create")
     public ModelAndView create(UserDTO user) {
         serviceInterface.create(user);
