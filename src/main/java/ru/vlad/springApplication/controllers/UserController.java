@@ -7,13 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.services.impl.UserServiceImpl;
@@ -28,29 +22,35 @@ public class UserController {
         this.serviceInterface = serviceInterface;
     }
 
+    @GetMapping("/create")
+    public ModelAndView createForm(@ModelAttribute("user") UserDTO user) {
+        return new ModelAndView("user_create");
+    }
+
     @PostMapping(value = "/create")
-    public void create(@RequestBody UserDTO user) {
+    public ModelAndView create(UserDTO user) {
         serviceInterface.create(user);
+        return new ModelAndView("redirect:/users/list");
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/edit/{id}")
     @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE", justification = "False positive?")
-    public ResponseEntity<UserDTO> getUser(@PathVariable("id") long id) {
-        final UserDTO user = serviceInterface.read(id);
-        System.out.println("Hello World");
-        return user != null
-                ? new ResponseEntity<>(user, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ModelAndView getUser(@PathVariable long id) {
+        ModelAndView model = new ModelAndView("user_edit");
+        model.addObject("user", serviceInterface.read(id));
+        return model;
     }
 
-    @PutMapping(value = "/update/{id}")
-    public void update(@PathVariable(name = "id") long id, @RequestBody UserDTO user) {
+    @PostMapping(value = "/update/{id}")
+    public ModelAndView update(@PathVariable(name = "id") long id, UserDTO user) {
         serviceInterface.update(user, id);
+        return new ModelAndView("redirect:/users/list");
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public void delete(@PathVariable(name = "id") long id) {
+    @PostMapping(value = "/delete/{id}")
+    public ModelAndView delete(@PathVariable long id) {
         serviceInterface.delete(id);
+        return new ModelAndView("redirect:/users/list");
     }
 
     @GetMapping("/list")

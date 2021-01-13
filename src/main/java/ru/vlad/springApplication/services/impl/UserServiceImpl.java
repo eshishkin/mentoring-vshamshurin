@@ -1,15 +1,12 @@
 package ru.vlad.springApplication.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.models.ModelUser;
 import ru.vlad.springApplication.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl {
