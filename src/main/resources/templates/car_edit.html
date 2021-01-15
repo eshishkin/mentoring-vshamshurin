@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Edit</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Изменение сборки автомобиля: </h1>
+    </br>
 <form th:method="POST" th:action="@{/cars/update/{id}(id=${car.getId()})}" th:object ="${car}">
     <label for="brand">Марка:</label>
     <input type="text" id="brand" th:field="*{brand}">
@@ -31,7 +35,9 @@
         </select>
         <br>
     </tr>
+    </br>
     <input type="submit" value="Обновить комплектацию!"/>
 </form>
+</div>
 </body>
 </html>

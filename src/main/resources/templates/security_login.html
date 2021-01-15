@@ -2,12 +2,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
-<div>
+<div class="center">
     <form name="f" th:action="@{/perform-login}" method="post">
         <fieldset>
             <legend>Войдите</legend>
+        </br>
             <div th:if="${param.error}" class="alert alert-error">
                 Неправильные имя и пароль.
             </div>
@@ -19,10 +21,12 @@
             <label for="pass">Пароль</label>
             <input type="password" id="pass" name="pass"/>
             <div class="form-actions">
+                </br>
                 <button type="submit" class="btn">Войти</button>
             </div>
         </fieldset>
     </form>
+    <a th:href="@{/register}">Зарегистрироваться</a>
 </div>
 </body>
 </html>

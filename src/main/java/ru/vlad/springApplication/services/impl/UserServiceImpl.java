@@ -22,6 +22,9 @@ public class UserServiceImpl {
     }
 
     public void create(UserDTO user) {
+        if (user.getRole() == null) {
+            user.setRole("USER");
+        }
         userRepository.save(createModelUser(user));
     }
 

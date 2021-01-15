@@ -4,28 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Cars List</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <ul>
+    <h1>Список готовых сборок автомобилей: </h1>
+    </br>
 <form th:method="POST" th:each ="car : ${cars}" th:action="@{/cars/delete/{id}(id=${car.getId()})}">
-    <li th:utext="${car.id}"></li>
+    <div th:utext="${car.id}"></div>
     <br>
-    <li th:utext="${car.brand}"></li>
+    <div th:utext="${car.brand}"></div>
     <br>
-    <li th:utext="${car.wheels.description}"></li>
+    <div th:utext="${car.wheels.description}"></div>
     <br>
-    <li th:utext="${car.transmission.description}"></li>
+    <div th:utext="${car.transmission.description}"></div>
     <br>
-    <li th:utext="${car.engine.description}"></li>
+    <div th:utext="${car.engine.description}"></div>
     <p><b>Дополнительная комплектация автомобиля:</b></p>
-    <p>===================</p>
+    <p>=============================</p>
     <th:block th:each="option : ${car.otherOption}">
-        <li th:utext="${option.description}"></li>
-        <p>===================</p>
+        <div th:utext="${option.description}"></div>
+        <p>=============================</p>
     </th:block>
-    <b><a th:href="@{/cars/update/{id}(id=${car.getId()})}">Изменить комплектацию</a></b>
+    <b><a th:href="@{/cars/edit/{id}(id=${car.getId()})}">Изменить комплектацию</a></b>
     <br><br>
     <input type="submit" value="Удалить комплектацию!">
-    <p>***************</p>
+    <p>**************************************</p>
 </form>
 </ul>
 </body>

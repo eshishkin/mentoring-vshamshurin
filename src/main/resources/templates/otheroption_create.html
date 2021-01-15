@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+  <h1>Создание дополнительных опций: </h1>
+  </br>
 <form th:action="@{/otherOption/create}" th:method="post" th:object="${otherOption}">
   <label for="name">Название опции: </label>
   <input type="text" id="name" th:field="*{name}">
@@ -17,5 +21,6 @@
   <br/>
   <input type="submit" value="Сохранить комплектацию!"/>
 </form>
+</div>
 </body>
 </html>

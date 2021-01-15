@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wheels List</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
 <form th:method="POST" th:each ="wheels : ${wheelsList}" th:action="@{/wheels/delete/{id}(id=${wheels.getId()})}">

@@ -1,4 +1,4 @@
-package ru.vlad.springApplication.services.impl;
+package ru.vlad.springApplication.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;

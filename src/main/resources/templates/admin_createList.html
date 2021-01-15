@@ -1,25 +1,24 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Create List</title>
+    <title>Админ панель</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet"
+                                                                              th:href="@{/css/admin_panel.css}">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/alphardex/aqua.css/dist/aqua.min.css'><link
+        rel="stylesheet" th:href="@{/css/admin_panel.css}">
 </head>
 <body>
-<form th:method="GET"  th:action="@{/engine/create}">
-    <input type="submit" value="ДОБАВИТЬ НОВЫЙ ДВИГАТЕЛЬ">
-</form>
-<br/>
-<form th:method="GET"  th:action="@{/wheels/create}">
-    <input type="submit" value="ДОБАВИТЬ НОВЫЕ КОЛЁСА">
-</form>
-<br/>
-<form th:method="GET"  th:action="@{/transmission/create}">
-    <input type="submit" value="ДОБАВИТЬ НОВУЮ ТРАНСМИССИЮ">
-</form>
-<br/>
-<form th:method="GET"  th:action="@{/otherOption/create}">
-    <input type="submit" value="ДОБАВИТЬ ДОП. ОПЦИЮ">
-</form>
+<div id="app">
+<ul class="nav">
+    <li class="nav-item"><a class="nav-link" th:href="@{/engine/create}">Двигатели</a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/wheels/create}">Колёса</a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/transmission/create}">Трансмиссия</a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/otherOption/create}">Доп. опции</a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/cars/list}">Готовые сборки</a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/users/list}">Пользователи</a></li>
+</ul>
+</div>
 </body>
 </html>

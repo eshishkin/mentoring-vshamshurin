@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Создание сборки автомобиля: </h1>
+    </br>
 <form th:action="@{/cars/create}" th:method="post" th:object="${car}">
     <label for="brand">Марка:</label>
         <input type="text" id="brand" th:field="*{brand}">
@@ -34,5 +38,6 @@
     <input type="submit" value="Купить!">
     <input th:formaction="@{/cars/price}" type="submit" value="Расчитать цену"/>
 </form>
+</div>
 </body>
 </html>

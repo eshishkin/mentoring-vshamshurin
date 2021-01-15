@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Other Options List</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
 <form th:method="POST" th:each ="otherOption : ${otherOptions}" th:action="@{/otherOption/delete/{id}(id=${otherOption.getId()})}">

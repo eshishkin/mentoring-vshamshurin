@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Transmission Create</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Создание новой трансмиссии: </h1>
+    </br>
 <form th:action="@{/transmission/create}" th:method="post" th:object="${transmission}">
     <label for="description">Описание:</label>
     <input type="text" id="description" th:field="*{description}">
@@ -15,5 +19,6 @@
     <br/>
     <input type="submit" value="Сохранить комплектацию!"/>
 </form>
+</div>
 </body>
 </html>
