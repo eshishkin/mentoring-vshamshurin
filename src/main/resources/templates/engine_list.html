@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Engines List</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<h1>Список созданных двигателей: </h1>
+</br>
 <form th:method="POST" th:each ="engine : ${engines}" th:action="@{/engine/delete/{id}(id=${engine.getId()})}">
     <label for="ID">ID: </label>
     <li th:utext="${engine.id}" id ="ID"></li>

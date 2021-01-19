@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Transmissions List</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
 <form th:method="POST" th:each ="transmission : ${transmissions}" th:action="@{/transmission/delete/{id}(id=${transmission.getId()})}">

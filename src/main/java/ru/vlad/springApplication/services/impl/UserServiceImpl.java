@@ -1,37 +1,45 @@
 package ru.vlad.springApplication.services.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import ru.vlad.springApplication.dto.UserDTO;
+import ru.vlad.springApplication.models.ModelUser;
+import ru.vlad.springApplication.models.Role;
+import ru.vlad.springApplication.repository.UserRepository;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
-import ru.vlad.springApplication.dto.User;
-import ru.vlad.springApplication.models.ModelUser;
-import ru.vlad.springApplication.repository.UserRepository;
 
 @Service
 public class UserServiceImpl {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public void create(User user) {
+    public void create(UserDTO user) {
+        if (user.getRole() == null) {
+            user.setRole("USER");
+        }
         userRepository.save(createModelUser(user));
     }
 
-    public List<User> readAll() {
+    public List<UserDTO> readAll() {
         List<ModelUser> modelUserList = userRepository.findAll();
-        List<User> userList = new ArrayList<>();
+        List<UserDTO> userList = new ArrayList<>();
         modelUserList.forEach(x -> userList.add(createDTOUser(x)));
         return userList;
     }
 
-    public User read(Long id) {
+    public UserDTO read(Long id) {
         return createDTOUser(userRepository.getOne(id));
     }
 
-    public boolean update(User user, Long id) {
+    public boolean update(UserDTO user, Long id) {
         if (userRepository.existsById(id)) {
             user.setId(id);
             userRepository.save(createModelUser(user));
@@ -48,11 +56,13 @@ public class UserServiceImpl {
         return false;
     }
 
-    public ModelUser createModelUser(User user) {
-        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId());
+    public ModelUser createModelUser(UserDTO user) {
+        return new ModelUser(user.getName(), user.getEmail(), user.getPhone(), user.getId(),
+                Role.valueOf(user.getRole()), passwordEncoder.encode(user.getPassword()));
     }
 
-    public User createDTOUser(ModelUser modelUser) {
-        return new User(modelUser.getName(), modelUser.getEmail(), modelUser.getPhone(), modelUser.getId());
+    public UserDTO createDTOUser(ModelUser modelUser) {
+        return new UserDTO(modelUser.getName(), modelUser.getEmail(), modelUser.getPhone(), modelUser.getId(),
+                modelUser.getRole(), modelUser.getPassword());
     }
 }

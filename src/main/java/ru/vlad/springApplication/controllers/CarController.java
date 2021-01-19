@@ -1,21 +1,13 @@
 package ru.vlad.springApplication.controllers;
 
-import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
-import ru.vlad.springApplication.services.impl.CarServiceImpl;
-import ru.vlad.springApplication.services.impl.EngineServiceImpl;
-import ru.vlad.springApplication.services.impl.OtherOptionServiceImpl;
-import ru.vlad.springApplication.services.impl.TransmissionServiceImpl;
-import ru.vlad.springApplication.services.impl.WheelsServiceImpl;
+import ru.vlad.springApplication.services.impl.*;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/cars")
@@ -25,7 +17,6 @@ public class CarController {
     public static final String ENGINES_MODEL = "enginesModel";
     public static final String TRANSMISSIONS_MODEL = "transmissionsModel";
     public static final String OTHER_OPTION_MODEL = "otherOptionModel";
-    public static final String PRICE = "price";
     private final CarServiceImpl carService;
     private final WheelsServiceImpl wheelsService;
     private final EngineServiceImpl engineService;
@@ -43,14 +34,12 @@ public class CarController {
     }
 
     @GetMapping
-    public ModelAndView createForm(@RequestParam(value = "price", required = false) BigDecimal price,
-                                   @ModelAttribute("car") Car car) {
+    public ModelAndView createForm(@ModelAttribute("car") Car car) {
         ModelAndView modelAndView = new ModelAndView(CARS, HttpStatus.OK);
         modelAndView.addObject(WHEELS_MODEL, wheelsService.readAll());
         modelAndView.addObject(ENGINES_MODEL, engineService.readAll());
         modelAndView.addObject(TRANSMISSIONS_MODEL, transmissionService.readAll());
         modelAndView.addObject(OTHER_OPTION_MODEL, otherOptionService.readAll());
-        modelAndView.addObject(PRICE, price);
         return modelAndView;
     }
 
@@ -62,15 +51,18 @@ public class CarController {
 
     @SuppressWarnings("MultipleStringLiterals")
     @PostMapping("/price")
-    public ModelAndView getPrice(Car car) {
-        ModelAndView model = new ModelAndView("redirect:/cars?price=" + carService.getPrice(car)
-                + "&brand=" + car.getBrand() + "&wheels_id=" + car.getWheelsId()
-                + "&transmission_id=" + car.getTransmissionId() + "&engine_id=" + car.getEngineId());
-        model.addObject("car", car);
+    public String getPrice(Car car) {
+        return "redirect:/cars/price?price=" + carService.getPrice(car);
+    }
+
+    @GetMapping("/price")
+    public ModelAndView getPrice(@RequestParam("price") BigDecimal price) {
+        ModelAndView model = new ModelAndView("car_price");
+        model.addObject("price", price);
         return model;
     }
 
-    @GetMapping("/update/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView editCar(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView("car_edit", HttpStatus.OK);
         modelAndView.addObject("car", carService.read(id));

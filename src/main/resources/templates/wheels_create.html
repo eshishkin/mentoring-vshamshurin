@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Wheels Create</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Создание новых колёс: </h1>
+    </br>
 <form th:action="@{/wheels/create}" th:method="post" th:object="${wheels}">
     <label for="description">Описание:</label>
     <input type="text" id="description" th:field="*{description}">
@@ -18,5 +22,6 @@
     <br/>
     <input type="submit" value="Сохранить колесо!"/>
 </form>
+</div>
 </body>
 </html>

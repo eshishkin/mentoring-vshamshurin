@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Transmission</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Редактирование созданной трансмиссии: </h1>
+    </br>
 <form th:method="POST" th:action="@{/transmission/update/{id}(id=${transmission.getId()})}" th:object ="${transmission}">
     <label for="description">Описание:</label>
     <input type="text" id="description" th:field="*{description}">
@@ -14,5 +18,6 @@
     <br/>
     <input type="submit" value="Обновить двигатель!"/>
 </form>
+</div>
 </body>
 </html>

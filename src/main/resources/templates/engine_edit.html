@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Engine</title>
+    <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
 </head>
 <body>
+<div class="center">
+    <h1>Редактирование двигателя: </h1>
+    </br>
 <form th:method="POST" th:action="@{/engine/update/{id}(id=${engine.getId()})}" th:object ="${engine}">
     <label for="description">Описание:</label>
     <input type="text" id="description" th:field="*{description}">
@@ -17,5 +21,6 @@
     <br/>
     <input type="submit" value="Обновить двигатель!"/>
 </form>
+</div>
 </body>
 </html>
