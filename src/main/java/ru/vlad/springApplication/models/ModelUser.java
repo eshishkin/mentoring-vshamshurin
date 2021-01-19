@@ -17,6 +17,7 @@ public class ModelUser implements Model<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(value = EnumType.ORDINAL)
     @Column(name = "role")
     private Role role;
     @Column(name = "password")

@@ -36,8 +36,12 @@
     <br>
     </p>
     <input type="submit" value="Купить!">
-    <input th:formaction="@{/cars/price}" type="submit" value="Расчитать цену"/>
+    <input th:formaction="@{/cars/price}" type="submit" value="Расчитать цену!"/>
 </form>
+    </br>
+    <form th:action="@{/auth/logout}" th:method="POST">
+        <button type="submit" name="logout">LOGOUT</button>
+    </form>
 </div>
 </body>
 </html>
