@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/transmission/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/otherOption/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/users/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/aspect/get_cache").hasRole(Role.ADMIN.name())
                 .antMatchers("/cars/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .antMatchers("/register").permitAll()
                 .antMatchers("/**").permitAll()
