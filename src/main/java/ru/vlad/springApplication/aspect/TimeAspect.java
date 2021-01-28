@@ -36,11 +36,10 @@ public class TimeAspect {
         long executionTime = System.currentTimeMillis() - start;
         String methodName = joinPoint.getSignature().toString();
         if (!cache.getCache().containsKey(methodName)) {
-            Pair<Long, Long> pair = Pair.of(executionTime, (long) 1);
-            cache.put(methodName, pair);
+            cache.put(methodName, Pair.of(executionTime, (long) 1));
         } else {
-            Pair<Long, Long> pair2 = Pair.of(executionTime, cache.getCache().get(methodName).getSecond() + 1);
-            cache.put(methodName, pair2);
+            cache.put(methodName, Pair.of(cache.getCache().get(methodName).getFirst() + executionTime,
+                    cache.getCache().get(methodName).getSecond() + 1));
         }
         return proceed;
     }
