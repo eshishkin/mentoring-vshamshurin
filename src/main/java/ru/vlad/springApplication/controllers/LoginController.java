@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.services.impl.UserServiceImpl;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ModelAndView register(UserDTO user) {
+    public ModelAndView register(@Valid UserDTO user) {
         userService.create(user);
         return new ModelAndView("redirect:/login");
     }

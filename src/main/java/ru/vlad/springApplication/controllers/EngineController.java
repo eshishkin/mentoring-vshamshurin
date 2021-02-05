@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Engine;
 import ru.vlad.springApplication.services.impl.EngineServiceImpl;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/engine")
 public class EngineController {
@@ -25,7 +27,7 @@ public class EngineController {
 
 
     @PostMapping("/create")
-    public ModelAndView engineCreate(Engine engine) {
+    public ModelAndView engineCreate(@Valid Engine engine) {
         engineService.create(engine);
         return new ModelAndView(REDIRECT_ENGINE_LIST);
     }
@@ -51,7 +53,7 @@ public class EngineController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView engineUpdate(Engine engine) {
+    public ModelAndView engineUpdate(@Valid Engine engine) {
         engineService.update(engine, engine.getId());
         return new ModelAndView(REDIRECT_ENGINE_LIST);
     }

@@ -35,10 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AccessDeniedHandler accessDeniedHandler(){
+    public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
 
+    @SuppressWarnings(value = "MultipleStringLiterals")
     @Override
     protected void configure(HttpSecurity http) throws Exception {
                 http

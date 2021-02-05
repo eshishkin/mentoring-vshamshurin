@@ -8,11 +8,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 @AllArgsConstructor
 @Component
 @Aspect
 public class TimeAspect {
-    private final AspectCache cache;
+    private final Map<String, Pair<Long, Long>> cache = new ConcurrentHashMap<>();
 
     @Pointcut("execution(public * ru.vlad.springApplication.controllers.*.*(..))")
     public void processingControllerMethods() {}
@@ -35,12 +38,16 @@ public class TimeAspect {
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
         String methodName = joinPoint.getSignature().toString();
-        if (!cache.getCache().containsKey(methodName)) {
-            cache.put(methodName, Pair.of(executionTime, (long) 1));
+        if (!cache.containsKey(methodName)) {
+            cache.compute(methodName, (a, b) -> b = Pair.of(executionTime, (long) 1));
         } else {
-            cache.put(methodName, Pair.of(cache.getCache().get(methodName).getFirst() + executionTime,
-                    cache.getCache().get(methodName).getSecond() + 1));
+            cache.compute(methodName, (a, b) -> b = Pair.of(cache.get(methodName).getFirst() + executionTime,
+                    cache.get(methodName).getSecond() + 1));
         }
         return proceed;
+    }
+
+    public Map<String, Pair<Long, Long>> getCache() {
+        return cache;
     }
 }

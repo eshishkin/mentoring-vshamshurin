@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Wheels;
 import ru.vlad.springApplication.services.impl.WheelsServiceImpl;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/wheels")
 public class WheelsController {
@@ -24,7 +26,7 @@ public class WheelsController {
     }
 
     @PostMapping("/create")
-    public ModelAndView wheelsCreate(Wheels wheels) {
+    public ModelAndView wheelsCreate(@Valid Wheels wheels) {
         wheelsService.create(wheels);
         return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
@@ -50,7 +52,7 @@ public class WheelsController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView wheelsOptionUpdate(Wheels wheels) {
+    public ModelAndView wheelsOptionUpdate(@Valid Wheels wheels) {
         wheelsService.update(wheels, wheels.getId());
         return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
