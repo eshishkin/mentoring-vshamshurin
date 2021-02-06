@@ -12,7 +12,7 @@ import ru.vlad.springApplication.repository.UserRepository;
 @AllArgsConstructor
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

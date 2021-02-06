@@ -1,15 +1,23 @@
 package ru.vlad.springApplication.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public class OtherOption {
 
+    @NotNull
     private long id;
 
+    @NotNull
+    @Size(max = 50)
     private String name;
 
+    @NotNull
+    @Size(max = 250)
     private String description;
 
+    @NotNull
     private BigDecimal price;
 
     public OtherOption() {}

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -13,14 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 public class Car {
 
+    @NotNull
     private Long id;
 
+    @NotNull
+    @Size(max = 50)
     private String brand;
 
+    @NotNull
     private Long wheelsId;
 
+    @NotNull
     private Long transmissionId;
 
+    @NotNull
     private Long engineId;
 
     private List<Long> otherOptions;

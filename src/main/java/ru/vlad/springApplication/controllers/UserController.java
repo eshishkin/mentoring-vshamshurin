@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.UserDTO;
 import ru.vlad.springApplication.services.impl.UserServiceImpl;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,7 +29,7 @@ public class UserController {
 
     @SuppressWarnings("MultipleStringLiterals")
     @PostMapping(value = "/create")
-    public ModelAndView create(UserDTO user) {
+    public ModelAndView create(@Valid UserDTO user) {
         serviceInterface.create(user);
         return new ModelAndView("redirect:/users/list");
     }
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/update/{id}")
-    public ModelAndView update(@PathVariable(name = "id") long id, UserDTO user) {
+    public ModelAndView update(@PathVariable(name = "id") long id, @Valid UserDTO user) {
         serviceInterface.update(user, id);
         return new ModelAndView("redirect:/users/list");
     }

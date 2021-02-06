@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.OtherOption;
 import ru.vlad.springApplication.services.impl.OtherOptionServiceImpl;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/otherOption")
 public class OtherOptionsController {
@@ -24,7 +26,7 @@ public class OtherOptionsController {
     }
 
     @PostMapping("/create")
-    public ModelAndView otherOptionCreate(OtherOption otherOption) {
+    public ModelAndView otherOptionCreate(@Valid OtherOption otherOption) {
         otherOptionService.create(otherOption);
         return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }
@@ -50,7 +52,7 @@ public class OtherOptionsController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView otherOptionUpdate(OtherOption otherOption) {
+    public ModelAndView otherOptionUpdate(@Valid OtherOption otherOption) {
         otherOptionService.update(otherOption, otherOption.getId());
         return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }

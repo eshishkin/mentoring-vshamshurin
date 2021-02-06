@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
 import ru.vlad.springApplication.services.impl.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Controller
@@ -44,7 +45,7 @@ public class CarController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createCar(Car car) {
+    public ModelAndView createCar(@Valid Car car) {
         carService.create(car);
         return new ModelAndView("redirect:/cars", HttpStatus.CREATED);
     }
@@ -75,7 +76,7 @@ public class CarController {
 
     @SuppressWarnings(value = "MultipleStringLiterals")
     @PostMapping(value = "/update/{id}")
-    public ModelAndView updateCar(@PathVariable(name = "id") long id, Car car) {
+    public ModelAndView updateCar(@PathVariable(name = "id") long id, @Valid Car car) {
         carService.update(car, id);
         return new ModelAndView("redirect:/cars/list");
     }

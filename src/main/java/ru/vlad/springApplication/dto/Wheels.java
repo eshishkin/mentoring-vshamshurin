@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Getter
@@ -13,12 +15,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Wheels {
 
+    @NotNull
     private Long id;
 
+    @NotNull
+    @Size(max = 250)
     private String description;
 
+    @NotNull
     private BigDecimal price;
 
+    @NotNull
     private int radius;
 
 }

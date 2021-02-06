@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Transmission;
 import ru.vlad.springApplication.services.impl.TransmissionServiceImpl;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/transmission")
 public class TransmissionController {
@@ -24,7 +26,7 @@ public class TransmissionController {
     }
 
     @PostMapping("/create")
-    public ModelAndView transmissionCreate(Transmission transmission) {
+    public ModelAndView transmissionCreate(@Valid Transmission transmission) {
         transmissionService.create(transmission);
         return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
@@ -52,7 +54,7 @@ public class TransmissionController {
 
 
     @PostMapping("/update/{id}")
-    public ModelAndView transmissionUpdate(Transmission transmission) {
+    public ModelAndView transmissionUpdate(@Valid Transmission transmission) {
         transmissionService.update(transmission, transmission.getId());
         return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
