@@ -3,6 +3,7 @@ package ru.vlad.springApplication.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +33,10 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ModelAndView register(@Valid UserDTO user) {
+    public ModelAndView register(@Valid UserDTO user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         userService.create(user);
         return new ModelAndView("redirect:/login");
     }

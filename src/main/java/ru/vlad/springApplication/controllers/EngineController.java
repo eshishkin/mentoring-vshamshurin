@@ -2,6 +2,7 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Engine;
@@ -27,7 +28,10 @@ public class EngineController {
 
 
     @PostMapping("/create")
-    public ModelAndView engineCreate(@Valid Engine engine) {
+    public ModelAndView engineCreate(@Valid Engine engine, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         engineService.create(engine);
         return new ModelAndView(REDIRECT_ENGINE_LIST);
     }
@@ -53,7 +57,10 @@ public class EngineController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView engineUpdate(@Valid Engine engine) {
+    public ModelAndView engineUpdate(@Valid Engine engine, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         engineService.update(engine, engine.getId());
         return new ModelAndView(REDIRECT_ENGINE_LIST);
     }

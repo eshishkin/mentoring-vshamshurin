@@ -2,6 +2,7 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Wheels;
@@ -26,7 +27,10 @@ public class WheelsController {
     }
 
     @PostMapping("/create")
-    public ModelAndView wheelsCreate(@Valid Wheels wheels) {
+    public ModelAndView wheelsCreate(@Valid Wheels wheels, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         wheelsService.create(wheels);
         return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
@@ -52,7 +56,10 @@ public class WheelsController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView wheelsOptionUpdate(@Valid Wheels wheels) {
+    public ModelAndView wheelsOptionUpdate(@Valid Wheels wheels, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         wheelsService.update(wheels, wheels.getId());
         return new ModelAndView(REDIRECT_TO_WHEEL_LIST);
     }
