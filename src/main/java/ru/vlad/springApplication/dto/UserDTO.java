@@ -26,10 +26,8 @@ public class UserDTO {
     @Size(max = 50)
     private String phone;
 
-    @NotNull
     private Long id;
 
-    @NotNull
     private String role;
 
     @NotNull

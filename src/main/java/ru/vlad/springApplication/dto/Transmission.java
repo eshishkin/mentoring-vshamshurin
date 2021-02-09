@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Transmission {
 
-    @NotNull
     private Long id;
 
     @NotNull

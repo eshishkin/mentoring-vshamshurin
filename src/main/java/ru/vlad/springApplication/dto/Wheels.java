@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Wheels {
 
-    @NotNull
     private Long id;
 
     @NotNull

@@ -2,6 +2,7 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Car;
@@ -45,7 +46,10 @@ public class CarController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createCar(@Valid Car car) {
+    public ModelAndView createCar(@Valid Car car, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         carService.create(car);
         return new ModelAndView("redirect:/cars", HttpStatus.CREATED);
     }
@@ -76,7 +80,10 @@ public class CarController {
 
     @SuppressWarnings(value = "MultipleStringLiterals")
     @PostMapping(value = "/update/{id}")
-    public ModelAndView updateCar(@PathVariable(name = "id") long id, @Valid Car car) {
+    public ModelAndView updateCar(@PathVariable(name = "id") long id, @Valid Car car, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         carService.update(car, id);
         return new ModelAndView("redirect:/cars/list");
     }

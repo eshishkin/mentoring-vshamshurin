@@ -15,11 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class Car {
 
-    @NotNull
     private Long id;
 
     @NotNull
-    @Size(max = 50)
+    @Size(min = 2, max = 50)
     private String brand;
 
     @NotNull

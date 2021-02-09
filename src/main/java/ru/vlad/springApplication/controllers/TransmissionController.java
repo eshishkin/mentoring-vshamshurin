@@ -2,6 +2,7 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.Transmission;
@@ -26,7 +27,10 @@ public class TransmissionController {
     }
 
     @PostMapping("/create")
-    public ModelAndView transmissionCreate(@Valid Transmission transmission) {
+    public ModelAndView transmissionCreate(@Valid Transmission transmission, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         transmissionService.create(transmission);
         return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }
@@ -51,10 +55,11 @@ public class TransmissionController {
         return modelAndView;
     }
 
-
-
     @PostMapping("/update/{id}")
-    public ModelAndView transmissionUpdate(@Valid Transmission transmission) {
+    public ModelAndView transmissionUpdate(@Valid Transmission transmission, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         transmissionService.update(transmission, transmission.getId());
         return new ModelAndView(REDIRECT_TRANSMISSION_LIST);
     }

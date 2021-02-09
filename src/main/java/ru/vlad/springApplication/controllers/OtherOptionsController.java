@@ -2,6 +2,7 @@ package ru.vlad.springApplication.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.OtherOption;
@@ -26,7 +27,10 @@ public class OtherOptionsController {
     }
 
     @PostMapping("/create")
-    public ModelAndView otherOptionCreate(@Valid OtherOption otherOption) {
+    public ModelAndView otherOptionCreate(@Valid OtherOption otherOption, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         otherOptionService.create(otherOption);
         return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }
@@ -52,7 +56,10 @@ public class OtherOptionsController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView otherOptionUpdate(@Valid OtherOption otherOption) {
+    public ModelAndView otherOptionUpdate(@Valid OtherOption otherOption, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         otherOptionService.update(otherOption, otherOption.getId());
         return new ModelAndView(REDIRECT_TO_OPTION_LIST);
     }

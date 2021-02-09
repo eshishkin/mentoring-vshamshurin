@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @Getter
 public class Engine {
 
-    @NotNull
     private Long id;
 
     @NotNull

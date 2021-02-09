@@ -4,6 +4,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vlad.springApplication.dto.UserDTO;
@@ -29,7 +30,10 @@ public class UserController {
 
     @SuppressWarnings("MultipleStringLiterals")
     @PostMapping(value = "/create")
-    public ModelAndView create(@Valid UserDTO user) {
+    public ModelAndView create(@Valid UserDTO user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         serviceInterface.create(user);
         return new ModelAndView("redirect:/users/list");
     }
@@ -43,7 +47,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/update/{id}")
-    public ModelAndView update(@PathVariable(name = "id") long id, @Valid UserDTO user) {
+    public ModelAndView update(@PathVariable(name = "id") long id, @Valid UserDTO user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("redirect:/validation/error");
+        }
         serviceInterface.update(user, id);
         return new ModelAndView("redirect:/users/list");
     }
